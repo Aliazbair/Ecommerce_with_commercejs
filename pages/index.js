@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Home = () => {
   return (
@@ -6,7 +6,7 @@ const Home = () => {
       <h1>home page</h1>
       <p>this app is upload in vercel pltform</p>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
