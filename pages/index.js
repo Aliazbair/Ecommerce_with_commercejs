@@ -1,12 +1,28 @@
-import React from 'react'
-
-const Home = () => {
+import Head from 'next/head'
+import getCommerce from '../utils/commerce'
+export default function Home({ products }) {
   return (
     <div>
-      <h1>home page</h1>
-      <p>this app is upload in vercel pltform</p>
+      <Head>
+        <title>Create Next app</title>
+      </Head>
+      {products.map((product) => (
+        <div key={product.id}>
+          <img src={product.media.source} alt={product.name} />
+          <p>{product.name}</p>
+          <p>{product.price.formatted_with_symbol}</p>
+        </div>
+      ))}
     </div>
   )
 }
 
-export default Home
+export async function getStaticProps() {
+  const commerce = getCommerce()
+  const { data: products } = await commerce.products.list()
+  return {
+    props: {
+      products,
+    },
+  }
+}
