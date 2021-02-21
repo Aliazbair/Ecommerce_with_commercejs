@@ -1,44 +1,28 @@
-import React, { createContext, useReducer } from 'react';
-import {
-  CART_RETRIEVE_REQUEST,
-  CART_RETRIEVE_SUCCESS,
-  ORDER_SET,
-} from './../utils/constants';
-export const Store = createContext();
-const order =
-  typeof window !== 'undefined' && window.localStorage.getItem('order_receipt')
-    ? JSON.parse(window.localStorage.getItem('order_receipt'))
-    : null;
-const initialState = {
-  cart: { loading: true },
-  order,
-};
+// get createContext and useReducer from react to create store
+import { createContext, useReducer } from 'react'
 
+// create Store with createContext
+export const Store = createContext()
+
+// create reducer function with params state,and action
 function reducer(state, action) {
+  // swqitch between the actions
   switch (action.type) {
-    case CART_RETRIEVE_REQUEST:
-      return {
-        ...state,
-        cart: { loading: true },
-      };
-    case CART_RETRIEVE_SUCCESS:
-      return {
-        ...state,
-        cart: { loading: false, data: action.payload },
-      };
-    case ORDER_SET:
-      return {
-        ...state,
-        order: action.payload,
-      };
     default:
-      return state;
+      return state
   }
 }
+//  make initialState
+const initialState={
+  cart:{loading:true},
+  order:null
+}
+// create StoreProvider
+export function StoreProvider(props){
+  // use state ans dispatch
+  const {state,dispatch}=useReducer(reducer,initialState)
 
-export function StoreProvider(props) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const value = { state, dispatch };
-  return <Store.Provider value={value}>{props.children}</Store.Provider>;
+  // create value
+  const value={state,dispatch}
+  return <Store.Provider value={value}>{props.children}</Store.Provider>
 }
