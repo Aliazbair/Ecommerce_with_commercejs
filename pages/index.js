@@ -1,19 +1,20 @@
 import Head from 'next/head'
+import Layout from '../components/Layout'
 import getCommerce from '../utils/commerce'
-export default function Home({ products }) {
+export default function Home(props) {
   return (
-    <div>
-      <Head>
-        <title>Create Next app</title>
-      </Head>
-      {products.map((product) => (
+    <Layout title="Home" commercePublicKey={props.commercePublicKey}>
+     <main>
+      {props.products.map((product) => (
         <div key={product.id}>
           <img src={product.media.source} alt={product.name} />
           <p>{product.name}</p>
           <p>{product.price.formatted_with_symbol}</p>
         </div>
       ))}
-    </div>
+
+     </main>
+    </Layout>
   )
 }
 
