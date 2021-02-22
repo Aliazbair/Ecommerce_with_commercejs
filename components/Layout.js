@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+
 import {
   AppBar,
   Box,
@@ -34,14 +35,15 @@ const Layout = ({ children, commercePublicKey, title = 'Coolshop' }) => {
           elevation={0}
           className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-            <NextLink href='/'>
+          <NextLink href="/">
               <Link
-                variant='h6'
-                color='inherit'
+                variant="h6"
+                color="inherit"
                 noWrap
-                href='/'
-                className={classes.toolbarTitle}>
-                collshop
+                href="/"
+                className={classes.toolbarTitle}
+              >
+                CoolShop
               </Link>
             </NextLink>
             <nav>
